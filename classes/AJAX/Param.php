@@ -21,6 +21,14 @@ abstract class AJAX_Param
     public function getValue(){
         return $this->value;
     }
+    
+    static public function requires($key)
+    {
+        if (empty(self::$pool[$key])) {
+            throw new Exception;
+        }
+        return new AJAX_Param_Required(self::$pool[$key]);
+    }
     static public function fromKey($key, $defaultValue = null)
     {
         if (array_key_exists($key, self::$pool)) {
