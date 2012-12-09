@@ -5,7 +5,7 @@
  *
  * @author micah
  */
-class AJAX_Param
+abstract class AJAX_Param
 {
     protected $value;
     static protected $pool = array();
@@ -15,16 +15,16 @@ class AJAX_Param
         $this->value = $value;
     }
     public function setValue($value)
-            {
+    {
         $this->value = $value;
-            }
-            public function getValue(){
-                return $this->value;
-            }
+    }
+    public function getValue(){
+        return $this->value;
+    }
     static public function fromKey($key, $defaultValue = null)
     {
         if (array_key_exists($key, self::$pool)) {
-            return new AJAX_Param();
+            return new AJAX_Param_Required();
         }
         throw new Exception;
     }
@@ -47,17 +47,12 @@ class AJAX_Param
     static public function defaults($key)
     {
         if (!empty(self::$pool[$key])) {
-            return new AJAX_Param(self::$pool[$key]);
+            return new AJAX_Param_Optional(self::$pool[$key]);
         }
-        return new AJAX_Param;
+        return new AJAX_Param_Optional;
     }
-    public function to($value)
-    {
-        if (is_null($this->value)) {
-            $this->value = $value;
-        }
-        return $this;
-    }
+    abstract public function to($param1, $param2 = null);
+    
     public function __toString()
     {
         return $this->value;
