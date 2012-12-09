@@ -30,30 +30,6 @@ class AJAX_ParamTest extends PHPUnit_Framework_TestCase
         }
         $this->fail('An error should have been thrown');
     }
-    public function testFromKeyRequiredExists()
-    {
-        AJAX_Param::setPool(array('index' => 'value'));
-        $this->assertInstanceOf('AJAX_Param', AJAX_Param::fromKey('index'));
-    }
-    public function testFromKeyRequiredDoesntExist()
-    {
-        try {
-            AJAX_Param::fromKey('key');
-        } catch (Exception $exc) {
-            return false;
-        }
-        $this->fail('Should have thrown an error');
-    }
-    public function testMustBeAIsValid()
-    {
-        
-    //    $param = AJAX_Param::fromKey('index')->mustBe('an', 'int');
-     //   $param2 = AJAX_Param::must('be a', stdClass);
-    }
-    public function testMustBeAIsNotValid()
-    {
-
-    }
     
     public function testDefaultToHasValue()
     {
