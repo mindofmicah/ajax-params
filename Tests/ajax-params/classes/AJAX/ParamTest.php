@@ -13,6 +13,23 @@ class AJAX_ParamTest extends PHPUnit_Framework_TestCase
         AJAX_Param::setPool($ary);
         $this->assertEquals($ary, AJAX_Param::getPool());
     }
+    public function testRequiresExists()
+    {
+        AJAX_Param::setPool(array('key'=>'value'));
+        $param = AJAX_Param::requires('key');
+        $this->assertInstanceOf('AJAX_Param', $param);
+        $this->assertEquals('value', (string)$param);
+    }
+    public function testRequiresNotExists()
+    {
+        AJAX_Param::setPool(array());
+        try {
+            AJAX_Param::requires('key');
+        } catch (Exception $exc) {
+            return true;
+        }
+        $this->fail('An error should have been thrown');
+    }
     public function testFromKeyRequiredExists()
     {
         AJAX_Param::setPool(array('index' => 'value'));
