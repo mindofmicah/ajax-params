@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Description of Param
+ * Description of AJAX_Param
  *
  * @author micah
  */
@@ -29,13 +28,6 @@ abstract class AJAX_Param
         }
         return new AJAX_Param_Required(self::$pool[$key]);
     }
-    static public function fromKey($key, $defaultValue = null)
-    {
-        if (array_key_exists($key, self::$pool)) {
-            return new AJAX_Param_Required();
-        }
-        throw new Exception;
-    }
 
     static public function setPool(array $pool)
     {
@@ -47,11 +39,6 @@ abstract class AJAX_Param
         return self::$pool;
     }
 
-    static public function must()
-    {
-        
-    }
-    
     static public function defaults($key)
     {
         if (!empty(self::$pool[$key])) {
