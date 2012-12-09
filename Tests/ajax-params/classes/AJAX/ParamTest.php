@@ -1,6 +1,8 @@
 <?php
 require '../../../../../../../php/pear/PHPUnit/Autoload.php';
 require '../../../../classes/AJAX/Param.php';
+require '../../../../classes/AJAX/Param/Required.php';
+require '../../../../classes/AJAX/Param/Optional.php';
 
 class AJAX_ParamTest extends PHPUnit_Framework_TestCase
 {
