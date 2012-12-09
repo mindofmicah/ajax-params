@@ -35,4 +35,29 @@ class AJAX_ParamTest extends PHPUnit_Framework_TestCase
     {
 
     }
+    
+    public function testDefaultToHasValue()
+    {
+        $pool = array('key'=>'value');
+        AJAX_Param::setPool($pool);
+        $param = AJAX_Param::defaults('key')->to('37');
+        $this->assertInstanceOf('AJAX_Param', $param);
+        $this->assertEquals('value', (string)$param);
+    }
+    public function testDefaultNoValue()
+    {
+        $pool = array('key'=>'');
+        AJAX_Param::setPool($pool);
+        $param = AJAX_Param::defaults('key')->to('37');
+        $this->assertInstanceOf('AJAX_Param', $param);
+        $this->assertEquals('37', (string)$param);        
+    }
+    public function testDefaultNoKey()
+    {
+        $pool = array();
+        AJAX_Param::setPool($pool);
+        $param = AJAX_Param::defaults('key')->to('37');
+        $this->assertInstanceOf('AJAX_Param', $param);
+        $this->assertEquals('37', (string)$param);        
+    }
 }
